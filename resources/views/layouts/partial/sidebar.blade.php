@@ -4,7 +4,7 @@
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href="{{ url('/') }}">
-            <span class="ms-1 font-weight-bold">Weighted Product</span>
+            <span class="ms-1 font-weight-bold">Penentu Kelulusan</span>
         </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -22,7 +22,7 @@
             <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Konfigurasi</h6>
         </li>
         <li class="nav-item">
-            <a class="nav-link " href="#">
+            <a class="nav-link " href="{{ route('kriteria-bobot') }}">
                 <div
                     class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="fa fa-scale-balanced text-dark text-sm opacity-10"></i>

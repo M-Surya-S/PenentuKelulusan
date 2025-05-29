@@ -4,6 +4,12 @@
 
 @push('style')
     <!-- CSS Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <Style>
+        .swal2-container {
+            z-index: 9999 !important;
+        }
+    </Style>
 @endpush
 
 @section('main')
@@ -14,7 +20,8 @@
             <div class="container-fluid py-1 px-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="{{ route('home') }}">Home</a>
+                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white"
+                                href="{{ route('home') }}">Home</a>
                         </li>
                     </ol>
                     <h6 class="font-weight-bolder text-white mb-0">Kriteria dan Bobot</h6>
@@ -47,7 +54,8 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-                            <a href="#" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Tambah Kriteria">
+                            <a href="{{ route('add-kriteria-bobot') }}" class="btn btn-sm btn-primary" data-toggle="tooltip"
+                                title="Tambah Kriteria">
                                 <i class="fas fa-plus me-1"></i> Tambah Kriteria
                             </a>
                         </div>
@@ -74,40 +82,55 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @for ($i = 0; $i < 5; $i++)
+                                        @forelse ($kriteria_bobot as $kriteria)
                                             <tr>
                                                 <td>
                                                     <p class="text-center text-sm font-weight-bold mb-0">
-                                                        C{{ $i + 1 }}</p>
+                                                        C{{ $loop->iteration }}</p>
                                                 </td>
                                                 <td>
-                                                    <p class="text-center text-sm font-weight-bold mb-0">Nilai Pretest</p>
+                                                    <p class="text-center text-sm font-weight-bold mb-0">
+                                                        {{ $kriteria->kriteria }}</p>
                                                 </td>
                                                 <td class="align-middle text-center text-sm">
-                                                    <span class="text-secondary text-sm font-weight-bold">1</span>
+                                                    <span
+                                                        class="text-secondary text-sm font-weight-bold">{{ $kriteria->bobot }}</span>
                                                 </td>
                                                 <td class="align-middle text-center">
-                                                    <span class="text-secondary text-sm font-weight-bold">Benefit</span>
+                                                    <span
+                                                        class="text-secondary text-sm font-weight-bold">{{ Str::title($kriteria->tipe) }}</span>
                                                 </td>
                                                 <td class="align-middle text-center">
-                                                    <a href="#" class="btn btn-sm btn-warning text-white mt-2 mb-2"
+                                                    <a href="{{ route('edit-kriteria-bobot', $kriteria->id) }}"
+                                                        class="btn btn-sm btn-warning text-white mt-2 mb-2"
                                                         data-toggle="tooltip" title="Edit">
-                                                        <i class="fas fa-edit me-1"></i>
-                                                        Edit
+                                                        <i class="fas fa-edit me-1"></i> Edit
                                                     </a>
                                                     <a href="#" class="btn btn-sm btn-secondary mt-2 mb-2"
-                                                        data-toggle="tooltip" title="Edit">
-                                                        <i class="fas fa-circle-info me-1"></i>
-                                                        Sub Kriteria
+                                                        data-toggle="tooltip" title="Sub Kriteria">
+                                                        <i class="fas fa-circle-info me-1"></i> Sub Kriteria
                                                     </a>
-                                                    <a href="#" class="btn btn-sm btn-danger mt-2 mb-2"
-                                                        data-toggle="tooltip" title="Hapus">
-                                                        <i class="fas fa-trash-alt me-1"></i>
-                                                        Hapus
-                                                    </a>
+                                                    <form id="delete-form-{{ $kriteria->id }}"
+                                                        action="{{ route('delete-kriteria-bobot', $kriteria->id) }}"
+                                                        method="POST" class="d-inline">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="button"
+                                                            onclick="confirmDelete('delete-form-{{ $kriteria->id }}')"
+                                                            class="btn btn-sm btn-danger mt-2 mb-2" data-toggle="tooltip"
+                                                            title="Hapus">
+                                                            <i class="fas fa-trash-alt me-1"></i> Hapus
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             </tr>
-                                        @endfor
+                                        @empty
+                                            <tr>
+                                                <td colspan="5" class="text-center text-muted pb-3 pt-3">Belum ada data
+                                                    kriteria
+                                                    dan bobot.</td>
+                                            </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>
@@ -117,7 +140,7 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-1">
-                          <h6>PERBAIKAN BOBOT</h6>
+                            <h6>PERBAIKAN BOBOT</h6>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
@@ -133,17 +156,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @for ($i = 0; $i < 5; $i++)
+                                        @forelse ($kriteria_bobot as $kriteria)
                                             <tr>
                                                 <td>
                                                     <p class="text-center text-sm font-weight-bold mb-2 mt-2">
-                                                        W{{ $i + 1 }}</p>
+                                                        W{{ $loop->iteration }}</p>
                                                 </td>
                                                 <td>
-                                                    <p class="text-center text-sm font-weight-bold mb-0">0.5</p>
+                                                    <p class="text-center text-sm font-weight-bold mb-0">
+                                                        {{ round($kriteria->bobot / $total_bobot, 2) }}</p>
                                                 </td>
                                             </tr>
-                                        @endfor
+                                        @empty
+                                            <tr>
+                                                <td colspan="2" class="text-center text-muted pb-3 pt-3">Belum ada data
+                                                    bobot.</td>
+                                            </tr>
+                                        @endforelse ()
                                     </tbody>
                                 </table>
                             </div>
@@ -154,3 +183,26 @@
         </div>
     </main>
 @endsection
+
+@push('script')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        function confirmDelete(formId) {
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Data akan dihapus secara permanen!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById(formId).submit();
+                }
+            });
+        }
+    </script>
+@endpush

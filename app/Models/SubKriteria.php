@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class sub_kriteria extends Model
+class SubKriteria extends Model
 {
     use HasFactory;
 
@@ -14,6 +14,6 @@ class sub_kriteria extends Model
 
     public function kriteria()
     {
-        return $this->belongsTo(kriteria_bobot::class, 'id_kriteria', 'id');
+        return $this->belongsTo(KriteriaBobot::class, 'id_kriteria', 'id');
     }
 }

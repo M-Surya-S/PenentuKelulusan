@@ -70,7 +70,7 @@ class KriteriaBobot extends Controller
             'tipe' => $request->tipe,
         ]);
 
-        return redirect(route('kriteria-bobot'))->with('success', 'Kriteria dan Bobot Berhasil Diubah!');
+        return redirect(route('kriteria-bobot'))->with('success', 'Berhasil Mengubah Kriteria!');
     }
 
     /**
@@ -80,6 +80,6 @@ class KriteriaBobot extends Controller
     {
         kriteria_bobot::destroy($id);
 
-        return redirect(route('kriteria-bobot'))->with('success', 'Kriteria dan Bobot Berhasil Dihapus!');
+        return redirect(route('kriteria-bobot'))->with('success', 'Berhasil Menghapus Kriteria!');
     }
 }

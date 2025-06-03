@@ -53,19 +53,19 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="example-text-input" class="form-control-label">Kriteria</label>
-                                            <input class="form-control" type="text" name="kriteria">
+                                            <input class="form-control" type="text" name="kriteria" required>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="example-text-input" class="form-control-label">Bobot</label>
-                                            <input class="form-control" type="number" name="bobot">
+                                            <input class="form-control" type="number" name="bobot" required>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="tipe" class="form-control-label">Tipe</label>
-                                            <select class="form-control" id="tipe" name="tipe">
+                                            <select class="form-control" id="tipe" name="tipe" required>
                                                 <option value="" disabled selected>-- Pilih Tipe --</option>
                                                 <option value="benefit">Benefit</option>
                                                 <option value="cost">Cost</option>

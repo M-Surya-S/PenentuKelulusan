@@ -74,6 +74,6 @@ class SubKriteria extends Controller
     {
         sub_kriteria::destroy($id);
 
-        return back()->with('success', 'Sub Kriteria Berhasil Dihapus');
+        return back()->with('success', 'Berhasil Menghapus Sub Kriteria!');
     }
 }

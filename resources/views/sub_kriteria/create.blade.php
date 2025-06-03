@@ -59,13 +59,13 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="example-text-input" class="form-control-label">Deskripsi</label>
-                                            <input class="form-control" type="text" name="deskripsi">
+                                            <input class="form-control" type="text" name="deskripsi" required>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="example-text-input" class="form-control-label">Bobot</label>
-                                            <input class="form-control" type="number" name="bobot">
+                                            <input class="form-control" type="number" name="bobot" required>
                                         </div>
                                     </div>
                                     <div class="col-md-12 text-end mt-3">

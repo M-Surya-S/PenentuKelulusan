@@ -55,20 +55,20 @@
                                         <div class="form-group">
                                             <label for="example-text-input" class="form-control-label">Kriteria</label>
                                             <input class="form-control" type="text" name="kriteria"
-                                                value="{{ $kriteria_bobot->kriteria }}">
+                                                value="{{ $kriteria_bobot->kriteria }}" required>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="example-text-input" class="form-control-label">Bobot</label>
                                             <input class="form-control" type="number" name="bobot"
-                                                value="{{ $kriteria_bobot->bobot }}">
+                                                value="{{ $kriteria_bobot->bobot }}" required>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="tipe" class="form-control-label">Tipe</label>
-                                            <select class="form-control" id="tipe" name="tipe">
+                                            <select class="form-control" id="tipe" name="tipe" required>
                                                 <option disabled {{ $kriteria_bobot->tipe ? '' : 'selected' }}>
                                                     -- Pilih Tipe --
                                                 </option>

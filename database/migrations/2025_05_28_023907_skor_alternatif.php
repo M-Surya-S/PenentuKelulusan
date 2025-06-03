@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('skor_alternatif', function(Blueprint $table){
             $table->id();
             $table->unsignedBigInteger('id_alternatif');
-            $table->foreign('id_alternatif')->references('id')->on('alternatif');
+            $table->foreign('id_alternatif')->references('id')->on('alternatif')->onDelete('cascade');
             $table->unsignedBigInteger('id_kriteria');
-            $table->foreign('id_kriteria')->references('id')->on('kriteria_bobot');
+            $table->foreign('id_kriteria')->references('id')->on('kriteria_bobot')->onDelete('cascade');
             $table->unsignedBigInteger('id_sub_kriteria');
-            $table->foreign('id_sub_kriteria')->references('id')->on('sub_kriteria');
+            $table->foreign('id_sub_kriteria')->references('id')->on('sub_kriteria')->onDelete('cascade');
             $table->timestamps();
         });
     }

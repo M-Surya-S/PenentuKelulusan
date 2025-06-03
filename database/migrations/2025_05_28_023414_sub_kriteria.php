@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sub_kriteria', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_kriteria');
-            $table->foreign('id_kriteria')->references('id')->on('kriteria_bobot');
+            $table->foreign('id_kriteria')->references('id')->on('kriteria_bobot')->onDelete('cascade');
             $table->float('rate');
             $table->string('desc', 100);
             $table->timestamps();

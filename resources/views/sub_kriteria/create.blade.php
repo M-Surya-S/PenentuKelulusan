@@ -17,9 +17,6 @@
                             <a class="opacity-5 text-white" href="{{ route('kriteria-bobot') }}">Kriteria dan Bobot</a>
                         </li>
                         <li class="breadcrumb-item text-sm">
-                            <a class="opacity-5 text-white" href="{{ route('sub-kriteria', $kriteria->id) }}">Sub Kriteria</a>
-                        </li>
-                        <li class="breadcrumb-item text-sm">
                             <a class="opacity-5 text-white" href="{{ route('sub-kriteria', $kriteria->id) }}">{{ $kriteria->kriteria }}</a>
                         </li>
                     </ol>

@@ -12,8 +12,13 @@ class KriteriaBobot extends Model
     protected $table = 'kriteria_bobot';
     protected $guarded = ['id'];
 
-    public function subKriteria()
+    public function sub_kriteria()
     {
         return $this->hasMany(SubKriteria::class, 'id_kriteria', 'id');
+    }
+
+    public function skor_alternatif()
+    {
+        return $this->hasMany(SkorAlternatif::class, 'id_kriteria', 'id');
     }
 }

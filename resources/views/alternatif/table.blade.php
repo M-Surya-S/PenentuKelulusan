@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Sub Kriteria')
+@section('title', 'Alternatif')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -20,14 +20,11 @@
             <div class="container-fluid py-1 px-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                        <li class="breadcrumb-item text-sm">
-                            <a class="opacity-5 text-white" href="{{ route('home') }}">Home</a>
-                        </li>
-                        <li class="breadcrumb-item text-sm">
-                            <a class="opacity-5 text-white" href="{{ route('kriteria-bobot') }}">Kriteria dan Bobot</a>
+                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white"
+                                href="{{ route('home') }}">Home</a>
                         </li>
                     </ol>
-                    <h4 class="font-weight-bolder text-white mb-0">{{ $kriteria->kriteria }}</h4>
+                    <h4 class="font-weight-bolder text-white mb-0">Alternatif</h4>
                 </nav>
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -57,9 +54,9 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-                            <a href="{{ route('add-sub-kriteria', $kriteria->id) }}" class="btn btn-sm btn-primary"
-                                data-toggle="tooltip" title="Tambah Sub Kriteria">
-                                <i class="fas fa-plus me-1"></i> Tambah Sub Kriteria
+                            <a href="{{ route('add-alternatif') }}" class="btn btn-sm btn-primary" data-toggle="tooltip"
+                                title="Tambah Alternatif">
+                                <i class="fas fa-plus me-1"></i> Tambah Alternatif
                             </a>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
@@ -72,44 +69,48 @@
                                                 No</th>
                                             <th
                                                 class="text-center text-uppercase text-sm text-secondary font-weight-bolder opacity-7">
-                                                Deskripsi</th>
-                                            <th
-                                                class="text-center text-uppercase text-sm text-secondary font-weight-bolder opacity-7">
-                                                Bobot</th>
+                                                Nama Peserta</th>
+                                            @foreach ($kriteria as $k)
+                                                <th
+                                                    class="text-center text-uppercase text-sm text-secondary font-weight-bolder opacity-7">
+                                                    {{ $k->kriteria }}</th>
+                                            @endforeach
                                             <th
                                                 class="text-center text-uppercase text-sm text-secondary font-weight-bolder opacity-7">
                                                 Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($sub_kriteria as $sk)
+                                        @forelse ($alternatif as $a)
                                             <tr>
                                                 <td>
                                                     <p class="text-center text-sm font-weight-bold mb-0">
-                                                        {{ $loop->iteration }}</p>
+                                                        {{ $loop->iteration }}.</p>
                                                 </td>
                                                 <td>
                                                     <p class="text-center text-sm font-weight-bold mb-0">
-                                                        {{ $sk->desc }}</p>
+                                                        {{ $a->name }}</p>
                                                 </td>
-                                                <td class="align-middle text-center text-sm">
-                                                    <span
-                                                        class="text-secondary text-sm font-weight-bold">{{ $sk->rate }}</span>
-                                                </td>
+                                                @foreach ($kriteria as $k)
+                                                    @php
+                                                        $skor = $a->skor_alternatif->firstWhere('id_kriteria', $k->id);
+                                                    @endphp
+                                                    <td class="text-center text-sm font-weight-bold mb-0">
+                                                        {{ $skor ? $skor->sub_kriteria->desc : '-' }}
+                                                    </td>
+                                                @endforeach
+
                                                 <td class="align-middle text-center">
-                                                    <a href="{{ route('edit-sub-kriteria', $sk->id) }}" class="btn btn-sm btn-warning text-white mt-2 mb-2"
-                                                        data-toggle="tooltip" title="Edit">
+                                                    <a href="#" class="btn btn-sm btn-warning text-white mt-2 mb-2"
+                                                        title="Edit">
                                                         <i class="fas fa-edit me-1"></i> Edit
                                                     </a>
-                                                    <form id="delete-form-{{ $sk->id }}"
-                                                        action="{{ route('delete-sub-kriteria', $sk->id) }}" method="POST"
+                                                    <form id="delete-form-id" action="#" method="POST"
                                                         class="d-inline">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="button"
-                                                            onclick="confirmDelete('delete-form-{{ $sk->id }}')"
-                                                            class="btn btn-sm btn-danger mt-2 mb-2" data-toggle="tooltip"
-                                                            title="Hapus">
+                                                        <button type="button" onclick="confirmDelete('delete-form-id')"
+                                                            class="btn btn-sm btn-danger mt-2 mb-2" title="Hapus">
                                                             <i class="fas fa-trash-alt me-1"></i> Hapus
                                                         </button>
                                                     </form>
@@ -117,8 +118,9 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="4" class="text-center text-muted pb-3 pt-3">Belum ada data
-                                                    sub kriteria.</td>
+                                                <td colspan="{{ $jumlah_kriteria + 3 }}"
+                                                    class="text-center text-muted pb-3 pt-3">Belum ada data
+                                                    alternatif.</td>
                                             </tr>
                                         @endforelse
                                     </tbody>
@@ -152,7 +154,7 @@
                 }
             });
         }
-        
+
         @if (session('success'))
             Swal.fire({
                 icon: 'success',

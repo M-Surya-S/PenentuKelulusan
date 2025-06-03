@@ -14,7 +14,7 @@ class SubKriteriaController extends Controller
     public function index(string $id)
     {
         $kriteria = KriteriaBobot::findorfail($id);
-        $sub_kriteria = SubKriteria::all();
+        $sub_kriteria = SubKriteria::where('id_kriteria', $id)->get();
 
         return view('sub_kriteria.table', compact('kriteria', 'sub_kriteria'));
     }

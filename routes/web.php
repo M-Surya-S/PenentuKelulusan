@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlternatifController;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\KriteriaBobotController;
 use App\Http\Controllers\SubKriteriaController;
@@ -24,4 +25,6 @@ Route::put('/kriteria-bobot/sub-kriteria/{id}/update', [SubKriteriaController::c
 Route::delete('/kriteria-bobot/sub-kriteria/{id}/delete', [SubKriteriaController::class, 'destroy'])->name('delete-sub-kriteria');
 
 # Alternatif
-// Route::get('/alternatif', []);
+Route::get('/alternatif', [AlternatifController::class, 'index'])->name('alternatif');
+Route::get('/alternatif/add', [AlternatifController::class, 'create'])->name('add-alternatif');
+Route::post('/alternatif/save', [AlternatifController::class, 'store'])->name('save-alternatif');

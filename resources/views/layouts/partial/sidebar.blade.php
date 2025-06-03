@@ -31,7 +31,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link " href="#">
+            <a class="nav-link {{ request()->is('alternatif*') ? 'active' : '' }}" href="{{ route('alternatif') }}">
                 <div
                     class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="fa fa-clipboard-user text-dark text-sm opacity-10"></i>

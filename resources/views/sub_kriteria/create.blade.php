@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Kriteria dan Bobot')
+@section('title', 'Tambah Sub Kriteria')
 
 @section('main')
     <main class="main-content position-relative border-radius-lg ">
@@ -16,8 +16,14 @@
                         <li class="breadcrumb-item text-sm">
                             <a class="opacity-5 text-white" href="{{ route('kriteria-bobot') }}">Kriteria dan Bobot</a>
                         </li>
+                        <li class="breadcrumb-item text-sm">
+                            <a class="opacity-5 text-white" href="{{ route('sub-kriteria', $kriteria->id) }}">Sub Kriteria</a>
+                        </li>
+                        <li class="breadcrumb-item text-sm">
+                            <a class="opacity-5 text-white" href="{{ route('sub-kriteria', $kriteria->id) }}">{{ $kriteria->kriteria }}</a>
+                        </li>
                     </ol>
-                    <h4 class="font-weight-bolder text-white mb-0">Edit</h4>
+                    <h4 class="font-weight-bolder text-white mb-0">Tambah Sub Kriteria</h4>
                 </nav>
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -45,44 +51,25 @@
         <div class="container-fluid py-4">
             <div class="row">
                 <div class="col-md-12">
-                    <form action="{{ route('update-kriteria-bobot', $kriteria_bobot->id) }}" method="POST">
-                        @method('PUT')
+                    <form action="{{ route('save-sub-kriteria', $kriteria->id) }}" method="POST">
                         @csrf
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="example-text-input" class="form-control-label">Kriteria</label>
-                                            <input class="form-control" type="text" name="kriteria"
-                                                value="{{ $kriteria_bobot->kriteria }}">
+                                            <label for="example-text-input" class="form-control-label">Deskripsi</label>
+                                            <input class="form-control" type="text" name="deskripsi">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="example-text-input" class="form-control-label">Bobot</label>
-                                            <input class="form-control" type="number" name="bobot"
-                                                value="{{ $kriteria_bobot->bobot }}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="tipe" class="form-control-label">Tipe</label>
-                                            <select class="form-control" id="tipe" name="tipe">
-                                                <option disabled {{ $kriteria_bobot->tipe ? '' : 'selected' }}>
-                                                    -- Pilih Tipe --
-                                                </option>
-                                                <option value="benefit"
-                                                    {{ $kriteria_bobot->tipe == 'benefit' ? 'selected' : '' }}>Benefit
-                                                </option>
-                                                <option value="cost"
-                                                    {{ $kriteria_bobot->tipe == 'cost' ? 'selected' : '' }}>Cost
-                                                </option>
-                                            </select>
+                                            <input class="form-control" type="number" name="bobot">
                                         </div>
                                     </div>
                                     <div class="col-md-12 text-end mt-3">
-                                        <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                                        <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
                                     </div>
                                 </div>
                             </div>

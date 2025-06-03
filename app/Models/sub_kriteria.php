@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class kriteria_bobot extends Model
+class sub_kriteria extends Model
 {
     use HasFactory;
 
-    protected $table = 'kriteria_bobot';
+    protected $table = 'sub_kriteria';
     protected $guarded = ['id'];
 
-    public function subKriteria()
+    public function kriteria()
     {
-        return $this->hasMany(sub_kriteria::class, 'id_kriteria', 'id');
+        return $this->belongsTo(kriteria_bobot::class, 'id_kriteria', 'id');
     }
 }

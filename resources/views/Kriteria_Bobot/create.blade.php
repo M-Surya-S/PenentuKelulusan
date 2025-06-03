@@ -17,7 +17,7 @@
                             <a class="opacity-5 text-white" href="{{ route('kriteria-bobot') }}">Kriteria dan Bobot</a>
                         </li>
                     </ol>
-                    <h6 class="font-weight-bolder text-white mb-0">Tambah Kriteria dan Bobot</h6>
+                    <h4 class="font-weight-bolder text-white mb-0">Tambah Kriteria dan Bobot</h4>
                 </nav>
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">

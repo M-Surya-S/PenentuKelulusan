@@ -14,6 +14,7 @@ class KriteriaBobot extends Controller
     {
         $kriteria_bobot = kriteria_bobot::all();
         $total_bobot = kriteria_bobot::sum('bobot');
+        
         return view('kriteria_bobot.table', compact('kriteria_bobot', 'total_bobot'));
     }
 

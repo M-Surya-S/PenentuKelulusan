@@ -19,4 +19,8 @@ Route::delete('/kriteria-bobot/{id}/delete', [KriteriaBobot::class, 'destroy'])-
 Route::get('/kriteria-bobot/sub-kriteria/{id}', [SubKriteria::class, 'index'])->name('sub-kriteria');
 Route::get('/kriteria-bobot/sub-kriteria/{id}/add', [SubKriteria::class, 'create'])->name('add-sub-kriteria');
 Route::post('/kriteria-bobot/sub-kriteria/{id}/save', [SubKriteria::class, 'store'])->name('save-sub-kriteria');
+Route::get('/kriteria-bobot/sub-kriteria/{id}/edit', [SubKriteria::class, 'edit'])->name('edit-sub-kriteria');
+Route::put('/kriteria-bobot/sub-kriteria/{id}/update', [SubKriteria::class, 'update'])->name('update-sub-kriteria');
 Route::delete('/kriteria-bobot/sub-kriteria/{id}/delete', [SubKriteria::class, 'destroy'])->name('delete-sub-kriteria');
+
+# Alternatif

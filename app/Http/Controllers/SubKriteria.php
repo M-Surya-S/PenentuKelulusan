@@ -56,7 +56,9 @@ class SubKriteria extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $sub_kriteria = sub_kriteria::findOrfail($id);
+
+        return view('sub_kriteria.edit', compact('sub_kriteria'));
     }
 
     /**
@@ -64,7 +66,14 @@ class SubKriteria extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $sub_kriteria = sub_kriteria::findOrfail($id);
+
+        $sub_kriteria->update([
+            'desc' => $request->deskripsi,
+            'rate' => $request->bobot,
+        ]);
+
+        return redirect(route('sub-kriteria', $sub_kriteria->id_kriteria))->with('success', 'Berhasil Mengubah Sub Kriteria!');
     }
 
     /**

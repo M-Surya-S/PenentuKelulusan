@@ -97,7 +97,7 @@
                                                         class="text-secondary text-sm font-weight-bold">{{ $sk->rate }}</span>
                                                 </td>
                                                 <td class="align-middle text-center">
-                                                    <a href="#" class="btn btn-sm btn-warning text-white mt-2 mb-2"
+                                                    <a href="{{ route('edit-sub-kriteria', $sk->id) }}" class="btn btn-sm btn-warning text-white mt-2 mb-2"
                                                         data-toggle="tooltip" title="Edit">
                                                         <i class="fas fa-edit me-1"></i> Edit
                                                     </a>

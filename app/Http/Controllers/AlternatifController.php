@@ -66,7 +66,10 @@ class AlternatifController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $alternatif = Alternatif::findOrFail($id);
+        $kriteria = KriteriaBobot::all();
+
+        return view('alternatif.edit', compact('alternatif', 'kriteria'));
     }
 
     /**
@@ -74,14 +77,35 @@ class AlternatifController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $alternatif = Alternatif::findOrFail($id);
+
+        $alternatif->update([
+            'name' => $request->name,
+        ]);
+
+        foreach ($request->tipe as $id_kriteria => $id_sub_kriteria) {
+            $skor_alternatif = SkorAlternatif::where('id_alternatif', $alternatif->id)
+                ->where('id_kriteria', $id_kriteria)
+                ->first();
+
+            if ($skor_alternatif) {
+                $skor_alternatif->update([
+                    'id_sub_kriteria' => $id_sub_kriteria
+                ]);
+            }
+        }
+
+        return redirect(route('alternatif'))->with('success', 'Berhasil Mengubah Alternatif!');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        Alternatif::destroy($id);
+
+        return redirect()->back()->with('success', 'Berhasil Menghapus Alternatif!');
     }
 }

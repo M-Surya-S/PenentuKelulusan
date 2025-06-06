@@ -4,6 +4,7 @@ use App\Http\Controllers\AlternatifController;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\KriteriaBobotController;
 use App\Http\Controllers\SubKriteriaController;
+use App\Models\Alternatif;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [Dashboard::class, 'index'])->name('home');
@@ -28,3 +29,6 @@ Route::delete('/kriteria-bobot/sub-kriteria/{id}/delete', [SubKriteriaController
 Route::get('/alternatif', [AlternatifController::class, 'index'])->name('alternatif');
 Route::get('/alternatif/add', [AlternatifController::class, 'create'])->name('add-alternatif');
 Route::post('/alternatif/save', [AlternatifController::class, 'store'])->name('save-alternatif');
+Route::get('/alternatif/{id}/edit', [AlternatifController::class, 'edit'])->name('edit-alternatif');
+Route::put('/alternatif/{id}/update', [AlternatifController::class, 'update'])->name('update-alternatif');
+Route::delete('/alternatif/{id}/delete', [AlternatifController::class, 'destroy'])->name('delete-alternatif');

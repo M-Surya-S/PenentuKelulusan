@@ -3,8 +3,8 @@
 use App\Http\Controllers\AlternatifController;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\KriteriaBobotController;
+use App\Http\Controllers\ResultController;
 use App\Http\Controllers\SubKriteriaController;
-use App\Models\Alternatif;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [Dashboard::class, 'index'])->name('home');
@@ -32,3 +32,7 @@ Route::post('/alternatif/save', [AlternatifController::class, 'store'])->name('s
 Route::get('/alternatif/{id}/edit', [AlternatifController::class, 'edit'])->name('edit-alternatif');
 Route::put('/alternatif/{id}/update', [AlternatifController::class, 'update'])->name('update-alternatif');
 Route::delete('/alternatif/{id}/delete', [AlternatifController::class, 'destroy'])->name('delete-alternatif');
+
+# Table Matrix
+Route::get('/matrix', [ResultController::class, 'matrix'])->name('matrix');
+Route::get('/ranking', [ResultController::class, 'ranking'])->name('ranking');

@@ -52,7 +52,7 @@
                                     <div class="numbers">
                                         <p class="text-sm mb-2 text-uppercase font-weight-bold">Jumlah Alternatif</p>
                                         <h5 class="font-weight-bolder mb-0">
-                                            {{ $alternatif }}
+                                            {{ $jumlah_alternatif }}
                                         </h5>
                                     </div>
                                 </div>
@@ -122,25 +122,27 @@
                         <div class="table-responsive">
                             <table class="table align-items-center ">
                                 <tbody>
-                                    <tr>
-                                        <td class="w-30">
-                                            <div class="d-flex px-2 py-1 align-items-center">
-                                                <div class="ms-3">
-                                                    <h6 class="text-sm mb-0">1.</h6>
+                                    @foreach ($sorted_alternatif as $alternatif) 
+                                        <tr>
+                                            <td class="w-30">
+                                                <div class="d-flex px-2 py-1 align-items-center">
+                                                    <div class="ms-3">
+                                                        <h6 class="text-sm mb-0">{{ $loop->iteration }}.</h6>
+                                                    </div>
+                                                    <div class="ms-5">
+                                                        <p class="text-xs font-weight-bold mb-0">Nama Peserta:</p>
+                                                        <h6 class="text-sm mb-0">{{ $alternatif->name }}</h6>
+                                                    </div>
                                                 </div>
-                                                <div class="ms-5">
-                                                    <p class="text-xs font-weight-bold mb-0">Nama Peserta:</p>
-                                                    <h6 class="text-sm mb-0">Surya</h6>
+                                            </td>
+                                            <td>
+                                                <div class="text-center">
+                                                    <p class="text-xs font-weight-bold mb-0">Skor:</p>
+                                                    <h6 class="text-sm mb-0">{{ number_format($vektor_v[$alternatif->id] ?? 0, 3) }}</h6>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="text-center">
-                                                <p class="text-xs font-weight-bold mb-0">Skor:</p>
-                                                <h6 class="text-sm mb-0">0.55</h6>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

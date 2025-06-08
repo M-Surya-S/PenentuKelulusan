@@ -43,14 +43,14 @@
             <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Hasil</h6>
         </li>
         <li class="nav-item">
-            <a class="nav-link " href="#">
+            <a class="nav-link {{ request()->is('matrix*') ? 'active' : '' }}" href="{{ route('matrix') }}">
                 <div
                     class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="fa fa-chart-simple text-dark text-sm opacity-10"></i>
                 </div>
                 <span class="nav-link-text ms-1">Table Matrix</span>
             </a>
-            <a class="nav-link " href="#">
+            <a class="nav-link {{ request()->is('ranking*') ? 'active' : '' }}" href="{{ route('ranking') }}">
                 <div
                     class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="fa fa-arrow-down-1-9 text-dark text-sm opacity-10"></i>

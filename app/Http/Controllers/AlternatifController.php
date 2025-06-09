@@ -19,6 +19,29 @@ class AlternatifController extends Controller
         $kriteria = KriteriaBobot::all();
         $jumlah_kriteria = $kriteria->count();
 
+        foreach ($alternatif as $a) {
+            $status = 'Lulus';
+
+            foreach ($kriteria as $k) {
+                $skor = $a->skor_alternatif->firstWhere('id_kriteria', $k->id);
+                $rate = $skor->sub_kriteria->rate ?? 0;
+
+                if (strtolower($k->kriteria) === 'kehadiran') {
+                    if ($rate < 3) {
+                        $status = 'Tidak Lulus';
+                        break;
+                    }
+                } else {
+                    if ($rate < 2) {
+                        $status = 'Tidak Lulus';
+                        break;
+                    }
+                }
+            }
+
+            $a->status = $status;
+        }
+
         return view('alternatif.table', compact('alternatif', 'kriteria', 'jumlah_kriteria'));
     }
 

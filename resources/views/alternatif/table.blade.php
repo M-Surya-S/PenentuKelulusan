@@ -77,6 +77,9 @@
                                             @endforeach
                                             <th
                                                 class="text-center text-uppercase text-sm text-secondary font-weight-bolder opacity-7">
+                                                Status</th>
+                                            <th
+                                                class="text-center text-uppercase text-sm text-secondary font-weight-bolder opacity-7">
                                                 Aksi</th>
                                         </tr>
                                     </thead>
@@ -99,17 +102,26 @@
                                                         {{ $skor ? $skor->sub_kriteria->desc : '-' }}
                                                     </td>
                                                 @endforeach
+                                                <td class="text-center">
+                                                    @if ($a->status === 'Lulus')
+                                                        <span class="badge bg-success">{{ $a->status }}</span>
+                                                    @else
+                                                        <span class="badge bg-danger">{{ $a->status }}</span>
+                                                    @endif
+                                                </td>
 
                                                 <td class="align-middle text-center">
-                                                    <a href="{{ route('edit-alternatif', $a->id) }}" class="btn btn-sm btn-warning text-white mt-2 mb-2"
-                                                        title="Edit">
+                                                    <a href="{{ route('edit-alternatif', $a->id) }}"
+                                                        class="btn btn-sm btn-warning text-white mt-2 mb-2" title="Edit">
                                                         <i class="fas fa-edit me-1"></i> Edit
                                                     </a>
-                                                    <form id="delete-form-{{ $a->id }}" action="{{ route('delete-alternatif', $a->id) }}" method="POST"
+                                                    <form id="delete-form-{{ $a->id }}"
+                                                        action="{{ route('delete-alternatif', $a->id) }}" method="POST"
                                                         class="d-inline">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="button" onclick="confirmDelete('delete-form-{{ $a->id }}')"
+                                                        <button type="button"
+                                                            onclick="confirmDelete('delete-form-{{ $a->id }}')"
                                                             class="btn btn-sm btn-danger mt-2 mb-2" title="Hapus">
                                                             <i class="fas fa-trash-alt me-1"></i> Hapus
                                                         </button>

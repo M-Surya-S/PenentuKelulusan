@@ -59,7 +59,7 @@
                                 <i class="fas fa-plus me-1"></i> Tambah Alternatif
                             </a>
                         </div>
-                        <div class="card-body px-0 pt-0 pb-2">
+                        <div class="card-body px-0 pt-0 pb-3">
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
                                     <thead>
@@ -88,7 +88,7 @@
                                             <tr>
                                                 <td>
                                                     <p class="text-center text-sm font-weight-bold mb-0">
-                                                        {{ $loop->iteration }}.</p>
+                                                        {{ ($alternatif->currentPage() - 1) * $alternatif->perPage() + $loop->iteration }}.</p>
                                                 </td>
                                                 <td>
                                                     <p class="text-center text-sm font-weight-bold mb-0">
@@ -139,6 +139,36 @@
                                 </table>
                             </div>
                         </div>
+                        @if ($alternatif->hasPages())
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination justify-content-center">
+                                    {{-- Tombol Previous --}}
+                                    <li class="page-item {{ $alternatif->onFirstPage() ? 'disabled' : '' }}">
+                                        <a class="page-link" href="{{ $alternatif->previousPageUrl() ?? '#' }}"
+                                            tabindex="-1">
+                                            <i class="fa fa-angle-left"></i>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                    </li>
+
+                                    {{-- Nomor Halaman --}}
+                                    @foreach ($alternatif->getUrlRange(1, $alternatif->lastPage()) as $page => $url)
+                                        <li class="page-item {{ $alternatif->currentPage() == $page ? 'active' : '' }}">
+                                            <a class="page-link {{ $alternatif->currentPage() == $page ? 'text-white' : '' }}"
+                                                href="{{ $url }}">{{ $page }}</a>
+                                        </li>
+                                    @endforeach
+
+                                    {{-- Tombol Next --}}
+                                    <li class="page-item {{ !$alternatif->hasMorePages() ? 'disabled' : '' }}">
+                                        <a class="page-link" href="{{ $alternatif->nextPageUrl() ?? '#' }}">
+                                            <i class="fa fa-angle-right"></i>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        @endif
                     </div>
                 </div>
             </div>

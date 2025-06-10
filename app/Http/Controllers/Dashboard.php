@@ -42,7 +42,9 @@ class Dashboard extends Controller
 
         arsort($vektor_v);
 
-        $sorted_alternatif = collect($vektor_v)->keys()->map(function ($id) use ($alternatif) {
+        $top_5_ids = array_slice(array_keys($vektor_v), 0, 5);
+
+        $sorted_alternatif = collect($top_5_ids)->map(function ($id) use ($alternatif) {
             return $alternatif->firstWhere('id', $id);
         });
 

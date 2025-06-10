@@ -15,7 +15,7 @@ class AlternatifController extends Controller
      */
     public function index()
     {
-        $alternatif = Alternatif::with(['skor_alternatif.kriteria', 'skor_alternatif.sub_kriteria'])->get();
+        $alternatif = Alternatif::with(['skor_alternatif.kriteria', 'skor_alternatif.sub_kriteria'])->paginate(10);
         $kriteria = KriteriaBobot::all();
         $jumlah_kriteria = $kriteria->count();
 

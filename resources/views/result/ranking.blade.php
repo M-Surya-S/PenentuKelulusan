@@ -44,14 +44,14 @@
                     <div class="card mb-4">
                         <div class="card-header pb-0">
                         </div>
-                        <div class="card-body px-0 pt-0 pb-2">
+                        <div class="card-body px-0 pt-0 pb-3">
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                         <tr>
                                             <th
                                                 class="text-center text-uppercase text-sm text-secondary font-weight-bolder opacity-7">
-                                                No</th>
+                                                Ranking</th>
                                             <th
                                                 class="text-center text-uppercase text-sm text-secondary font-weight-bolder opacity-7">
                                                 Nama Peserta</th>
@@ -64,7 +64,7 @@
                                         @forelse ($alternatif as $a)
                                             <tr>
                                                 <td>
-                                                    <p class="text-center text-sm font-weight-bold mb-0">
+                                                    <p class="text-center text-sm font-weight-bold mb-2 mt-2">
                                                         {{ $loop->iteration }}.</p>
                                                 </td>
                                                 <td>
@@ -79,8 +79,7 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="3"
-                                                    class="text-center text-muted pb-3 pt-3">Belum ada data
+                                                <td colspan="3" class="text-center text-muted pb-3 pt-3">Belum ada data
                                                     ranking.</td>
                                             </tr>
                                         @endforelse

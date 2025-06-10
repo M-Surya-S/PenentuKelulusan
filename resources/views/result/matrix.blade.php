@@ -66,6 +66,9 @@
                                             <th
                                                 class="text-center text-uppercase text-sm text-secondary font-weight-bolder opacity-7">
                                                 Vektor V</th>
+                                            <th
+                                                class="text-center text-uppercase text-sm text-secondary font-weight-bolder opacity-7">
+                                                Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -97,6 +100,13 @@
                                                     <p class="text-center text-sm font-weight-bold mb-0">
                                                         {{ number_format($vektor_v[$a->id] ?? 0, 3) }}
                                                     </p>
+                                                </td>
+                                                <td class="text-center">
+                                                    @if ($a->status === 'Lulus')
+                                                        <span class="badge bg-success">{{ $a->status }}</span>
+                                                    @else
+                                                        <span class="badge bg-danger">{{ $a->status }}</span>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @empty

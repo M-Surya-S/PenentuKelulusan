@@ -122,7 +122,7 @@
                         <div class="table-responsive">
                             <table class="table align-items-center ">
                                 <tbody>
-                                    @foreach ($sorted_alternatif as $alternatif) 
+                                    @foreach ($sorted_alternatif as $a)
                                         <tr>
                                             <td class="w-30">
                                                 <div class="d-flex px-2 py-1 align-items-center">
@@ -131,16 +131,34 @@
                                                     </div>
                                                     <div class="ms-5">
                                                         <p class="text-xs font-weight-bold mb-0">Nama Peserta:</p>
-                                                        <h6 class="text-sm mb-0">{{ $alternatif->name }}</h6>
+                                                        <h6 class="text-sm mb-0">{{ $a->name }}</h6>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="text-center">
                                                     <p class="text-xs font-weight-bold mb-0">Skor:</p>
-                                                    <h6 class="text-sm mb-0">{{ number_format($vektor_v[$alternatif->id] ?? 0, 3) }}</h6>
+                                                    <h6 class="text-sm mb-0">
+                                                        {{ number_format($vektor_v[$a->id] ?? 0, 3) }}</h6>
                                                 </div>
                                             </td>
+                                            <td>
+                                                <div class="text-center">
+                                                    <p class="text-xs font-weight-bold mb-0">Status:</p>
+                                                    @if ($a->status === 'Lulus')
+                                                        <span class="badge bg-success">{{ $a->status }}</span>
+                                                    @else
+                                                        <span class="badge bg-danger">{{ $a->status }}</span>
+                                                    @endif
+                                                </div>
+                                            </td>
+                                            {{-- <td class="text-center">
+                                                @if ($a->status === 'Lulus')
+                                                    <span class="badge bg-success">{{ $a->status }}</span>
+                                                @else
+                                                    <span class="badge bg-danger">{{ $a->status }}</span>
+                                                @endif
+                                            </td> --}}
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -155,11 +173,15 @@
                         </div>
                         <div class="card-body p-3">
                             <ul class="list-group">
-                                @foreach ($kriteria_bobot as $kriteria) 
+                                @foreach ($kriteria_bobot as $kriteria)
                                     @php
-                                        $sub_kriteria = App\Models\SubKriteria::where('id_kriteria', $kriteria->id)->count();
+                                        $sub_kriteria = App\Models\SubKriteria::where(
+                                            'id_kriteria',
+                                            $kriteria->id,
+                                        )->count();
                                     @endphp
-                                    <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                                    <li
+                                        class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                                         <div class="d-flex align-items-center">
                                             <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
                                                 <i class="ni ni-archive-2 text-white opacity-10"></i>

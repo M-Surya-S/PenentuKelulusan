@@ -48,6 +48,29 @@ class Dashboard extends Controller
             return $alternatif->firstWhere('id', $id);
         });
 
+        foreach ($alternatif as $a) {
+            $status = 'Lulus';
+
+            foreach ($kriteria as $k) {
+                $skor = $a->skor_alternatif->firstWhere('id_kriteria', $k->id);
+                $rate = $skor->sub_kriteria->rate ?? 0;
+
+                if (strtolower($k->kriteria) === 'kehadiran') {
+                    if ($rate < 3) {
+                        $status = 'Tidak Lulus';
+                        break;
+                    }
+                } else {
+                    if ($rate < 2) {
+                        $status = 'Tidak Lulus';
+                        break;
+                    }
+                }
+            }
+
+            $a->status = $status;
+        }
+
         return view('dashboard', compact('kriteria_bobot', 'jumlah_kriteria', 'jumlah_sub_kriteria', 'jumlah_alternatif', 'sorted_alternatif', 'vektor_v'));
     }
 }

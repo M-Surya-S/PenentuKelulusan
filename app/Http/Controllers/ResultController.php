@@ -38,6 +38,29 @@ class ResultController extends Controller
             $vektor_v[$id] = $s / $total_s;
         }
 
+        foreach ($alternatif as $a) {
+            $status = 'Lulus';
+
+            foreach ($kriteria as $k) {
+                $skor = $a->skor_alternatif->firstWhere('id_kriteria', $k->id);
+                $rate = $skor->sub_kriteria->rate ?? 0;
+
+                if (strtolower($k->kriteria) === 'kehadiran') {
+                    if ($rate < 3) {
+                        $status = 'Tidak Lulus';
+                        break;
+                    }
+                } else {
+                    if ($rate < 2) {
+                        $status = 'Tidak Lulus';
+                        break;
+                    }
+                }
+            }
+
+            $a->status = $status;
+        }
+
         return view('result.matrix', compact('alternatif', 'kriteria', 'jumlah_kriteria', 'vektor_v', 'vektor_s'));
     }
 
@@ -72,6 +95,29 @@ class ResultController extends Controller
         $sorted_alternatif = collect($vektor_v)->keys()->map(function ($id) use ($alternatif) {
             return $alternatif->firstWhere('id', $id);
         });
+
+        foreach ($alternatif as $a) {
+            $status = 'Lulus';
+
+            foreach ($kriteria as $k) {
+                $skor = $a->skor_alternatif->firstWhere('id_kriteria', $k->id);
+                $rate = $skor->sub_kriteria->rate ?? 0;
+
+                if (strtolower($k->kriteria) === 'kehadiran') {
+                    if ($rate < 3) {
+                        $status = 'Tidak Lulus';
+                        break;
+                    }
+                } else {
+                    if ($rate < 2) {
+                        $status = 'Tidak Lulus';
+                        break;
+                    }
+                }
+            }
+
+            $a->status = $status;
+        }
 
         return view('result.ranking', [
             'alternatif' => $sorted_alternatif,
